@@ -1,0 +1,11 @@
+# Render.com deployment — "New +" > "Blueprint" in the Render dashboard,
+# pointing at the repo that contains this folder.
+services:
+  - type: web
+    name: brawlix-matchmaker
+    runtime: python
+    plan: free            # sleeps when idle; Starter ($7/mo) never sleeps
+    rootDir: matchmaking-server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
